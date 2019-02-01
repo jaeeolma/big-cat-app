@@ -7,7 +7,7 @@ from io import BytesIO
 
 from fastai.vision import *
 
-model_file_url = 'https://www.dropbox.com/s/y4kl2gv1akv7y4i/stage-2.pth?raw=1'
+model_file_url = 'https://www.dropbox.com/s/dhibuphohfwe28w/big_cats_fastai_stage2.pth?dl=1'
 model_file_name = 'big_cats_fastai_stage2'
 classes = ['Cheetah', 
            'Clouded leopard', 
@@ -18,7 +18,7 @@ classes = ['Cheetah',
            'Snow leopard', 
            'Sunda clouded leopard', 
            'Tiger']
-           
+
 path = Path(__file__).parent
 
 app = Starlette()
@@ -33,7 +33,7 @@ async def download_file(url, dest):
             with open(dest, 'wb') as f: f.write(data)
 
 async def setup_learner():
-    #await download_file(model_file_url, path/'models'/f'{model_file_name}.pth')
+    await download_file(model_file_url, path/'models'/f'{model_file_name}.pth')
     data_bunch = ImageDataBunch.single_from_classes(path, classes,
         tfms=get_transforms(), size=224).normalize(imagenet_stats)
     learn = create_cnn(data_bunch, models.resnet50, pretrained=False)
