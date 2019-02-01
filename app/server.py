@@ -8,8 +8,17 @@ from io import BytesIO
 from fastai.vision import *
 
 model_file_url = 'https://www.dropbox.com/s/y4kl2gv1akv7y4i/stage-2.pth?raw=1'
-model_file_name = 'model'
-classes = ['black', 'grizzly', 'teddys']
+model_file_name = 'big_cats_fastai_stage2'
+classes = ['Cheetah', 
+           'Clouded leopard', 
+           'Cougar', 
+           'Jaguar', 
+           'Leopard',
+           'Lion', 
+           'Snow leopard', 
+           'Sunda clouded leopard', 
+           'Tiger']
+           
 path = Path(__file__).parent
 
 app = Starlette()
@@ -24,10 +33,10 @@ async def download_file(url, dest):
             with open(dest, 'wb') as f: f.write(data)
 
 async def setup_learner():
-    await download_file(model_file_url, path/'models'/f'{model_file_name}.pth')
+    #await download_file(model_file_url, path/'models'/f'{model_file_name}.pth')
     data_bunch = ImageDataBunch.single_from_classes(path, classes,
         tfms=get_transforms(), size=224).normalize(imagenet_stats)
-    learn = create_cnn(data_bunch, models.resnet34, pretrained=False)
+    learn = create_cnn(data_bunch, models.resnet50, pretrained=False)
     learn.load(model_file_name)
     return learn
 
@@ -46,7 +55,15 @@ async def analyze(request):
     data = await request.form()
     img_bytes = await (data['file'].read())
     img = open_image(BytesIO(img_bytes))
-    return JSONResponse({'result': learn.predict(img)[0]})
+    res = learn.predict(img)
+    top_3 = (res[2].numpy()).argsort()[-3:][::-1]
+    resp_dict = {'best_result': str(res[0]),
+                'best_confidence': round(float(res[2][top_3[0]]), 3),
+                'second_result': classes[top_3[1]],
+                'second_confidence': round(float(res[2][top_3[1]]), 3),
+                'third_result': classes[top_3[2]],
+                'third_confidence': round(float(res[2][top_3[2]]), 3)}
+    return JSONResponse(resp_dict)
 
 if __name__ == '__main__':
     if 'serve' in sys.argv: uvicorn.run(app, host='0.0.0.0', port=8080)

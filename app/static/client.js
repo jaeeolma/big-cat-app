@@ -24,7 +24,12 @@ function analyze() {
     xhr.onload = function(e) {
         if (this.readyState === 4) {
             var response = JSON.parse(e.target.responseText);
-            el('result-label').innerHTML = `Result = ${response['result']}`;
+            el('best-result-label').innerHTML = `This big cat is ${response['best_result']}`;
+            el('best-confidence-label').innerHTML = `with ${response['best_confidence']} confidence.`;
+            el('second-result-label').innerHTML = `Other possibilities are ${response['second_result']}`;
+            el('second-confidence-label').innerHTML = `with ${response['second_confidence']} confidence`;
+            el('third-result-label').innerHTML = `and ${response['third_result']}`;
+            el('third-confidence-label').innerHTML = `with ${response['third_confidence']} confidence.`;
         }
         el('analyze-button').innerHTML = 'Analyze';
     }

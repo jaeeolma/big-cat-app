@@ -23,11 +23,11 @@ body {
 }
 
 .content {
-    margin-top: 10em;
+    margin-top: 2em;
 }
 
 .analyze {
-    margin-top: 5em;
+    margin-top: 2em;
 }
 
 .upload-label {
@@ -37,7 +37,7 @@ body {
 
 .result-label {
     margin-top: 0.5em;
-    padding: 10px;
+    padding: 15px;
     font-size: 13px;
 }
 

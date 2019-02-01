@@ -7,7 +7,7 @@
     <body>
         <div>
             <div class='center'>
-                <div class='title'>DEMO YOUR ML MODEL</div>
+                <div class='title'>Which of the nine big(ish) cats is in your image?</div>
                 <div class='content'>
                     <div class='no-display'>
                         <input id='file-input'
@@ -28,7 +28,12 @@
                         <button id='analyze-button' class='analyze-button' type='button' onclick='analyze()'>Analyze</button>
                     </div>
                     <div class='result-label'>
-                        <label id='result-label'></label>
+                        <label id='best-result-label'></label>
+                        <label id='best-confidence-label'></label><br>
+                        <label id='second-result-label'></label>
+                        <label id='second-confidence-label'></label>
+                        <label id='third-result-label'></label>
+                        <label id='third-confidence-label'></label>
                     </div>
                 </div>
             </div>
