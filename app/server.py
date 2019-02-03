@@ -9,12 +9,16 @@ from fastai.vision import *
 
 model_file_url = 'https://www.dropbox.com/s/dhibuphohfwe28w/big_cats_fastai_stage2.pth?raw=1'
 model_file_name = 'big_cats_fastai_stage2'
-classes = ['Cheetah', 
+classes = ['Caracal',
+           'Cheetah', 
            'Clouded leopard', 
            'Cougar', 
            'Jaguar', 
+           'Jungle cat'
            'Leopard',
            'Lion', 
+           'Lynx',
+           'Serval',
            'Snow leopard', 
            'Sunda clouded leopard', 
            'Tiger']
