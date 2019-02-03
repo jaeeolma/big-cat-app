@@ -14,7 +14,7 @@ classes = ['Caracal',
            'Clouded leopard', 
            'Cougar', 
            'Jaguar', 
-           'Jungle cat'
+           'Jungle cat',
            'Leopard',
            'Lion', 
            'Lynx',
