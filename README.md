@@ -1,13 +1,17 @@
-# Which of the big cats is in the image
+# Which of the wild cats is in the image
 
 Simple web application for image classification. Input an image, and model tries to predict which of the species of the extended big cat family. Possible labels are
 
+- Caracal
 - Cheetah 
 - Clouded leopard 
 - Cougar 
-- Jaguar 
+- Jaguar
+- Jungle cat
 - Leopard
 - Lion
+- Lynx
+- Serval
 - Snow leopard
 - Sunda clouded leopard 
 - Tiger
