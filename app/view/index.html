@@ -1,42 +1,45 @@
 <html lang='en'>
-    <head>
-        <meta charset='utf-8'>
-        <link rel='stylesheet' href='../static/style.css'>
-        <script src='../static/client.js'></script>
-    </head>
-    <body>
-        <div>
-            <div class='center'>
-                <div class='title'>Which wild cat is in your image?</div>
-                <div class='content'>
-                    <div class='no-display'>
-                        <input id='file-input'
-                            class='no-display'
-                            type='file'
-                            name='file'
-                            accept='image/*'
-                            onchange='showPicked(this)'>
-                    </div>
-                    <button class='choose-file-button' type='button' onclick='showPicker()'>Select Image</button>
-                    <div class='upload-label'>
-                        <label id='upload-label'>No file chosen</label>
-                    </div>
-                    <div>
-                        <img id='image-picked' class='no-display' alt='Chosen Image' height='200'>
-                    </div>
-                    <div class='analyze'>
-                        <button id='analyze-button' class='analyze-button' type='button' onclick='analyze()'>Analyze</button>
-                    </div>
-                    <div class='result-label'>
-                        <label id='best-result-label'></label>
-                        <label id='best-confidence-label'></label><br>
-                        <label id='second-result-label'></label>
-                        <label id='second-confidence-label'></label>
-                        <label id='third-result-label'></label>
-                        <label id='third-confidence-label'></label>
-                    </div>
+
+<head>
+    <meta charset='utf-8'>
+    <link rel='stylesheet' href='../static/style.css'>
+    <script src='../static/client.js'></script>
+</head>
+
+<body>
+    <div>
+        <div class='center'>
+            <div class='title'>Which wild cat is in your image?</div>
+            <div class='content'>
+                <p>
+                    Upload an image containing either caracal, cheetah, clouded leopard, cougar, jaguar, jungle cat,
+                    leopard, lion, lynx, serval,
+                    snow leopard, sunda clouded leopard or tiger to find out which one of these it is.
+                </p>
+                <div class='no-display'>
+                    <input id='file-input' class='no-display' type='file' name='file' accept='image/*' onchange='showPicked(this)'>
+                </div>
+                <button class='choose-file-button' type='button' onclick='showPicker()'>Select Image</button>
+                <div class='upload-label'>
+                    <label id='upload-label'>No file chosen</label>
+                </div>
+                <div>
+                    <img id='image-picked' class='no-display' alt='Chosen Image' height='200'>
+                </div>
+                <div class='analyze'>
+                    <button id='analyze-button' class='analyze-button' type='button' onclick='analyze()'>Analyze</button>
+                </div>
+                <div class='result-label'>
+                    <label id='best-result-label'></label>
+                    <label id='best-confidence-label'></label><br>
+                    <label id='second-result-label'></label>
+                    <label id='second-confidence-label'></label>
+                    <label id='third-result-label'></label>
+                    <label id='third-confidence-label'></label>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>
