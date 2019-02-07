@@ -20,9 +20,9 @@ function analyze() {
     var xhr = new XMLHttpRequest();
     var loc = window.location
     xhr.open('POST', `${loc.protocol}//${loc.hostname}:${loc.port}/analyze`, true);
-    xhr.onerror = function () { alert(xhr.responseText); }
+    xhr.onerror = function () { el('analyze-button').innerHTML = 'Analyze'; alert(xhr.responseText);}
     xhr.onload = function (e) {
-        if (this.readyState === 4) {
+        if (this.readyState === 4 && this.status === 200) {
             var response = JSON.parse(e.target.responseText);
             el('best-result-label').innerHTML = `This wild cat is ${response['best_result']}`;
             el('best-confidence-label').innerHTML = `with ${response['best_confidence']} confidence.`;
@@ -46,7 +46,7 @@ function analyzeUrl() {
     var xhr = new XMLHttpRequest();
     var loc = window.location
     xhr.open('GET', `${loc.protocol}//${loc.hostname}:${loc.port}/analyze_url?url=` + extUrl, true);
-    xhr.onerror = function () { alert(xhr.responseText); }
+    xhr.onerror = function () { alert(xhr.responseText);}
     xhr.onload = function (e) {
         if (this.readyState === 4 && this.status === 200) {
             var response = JSON.parse(e.target.responseText);
@@ -59,6 +59,7 @@ function analyzeUrl() {
             el('second-confidence-label').innerHTML = `with ${response['second_confidence']} confidence`;
             el('third-result-label').innerHTML = `and ${response['third_result']}`;
             el('third-confidence-label').innerHTML = `with ${response['third_confidence']} confidence.`;
+            el('file-input').value = "";
         } else if (this.readyState === 4 && this.status === 500) {
             alert(xhr.responseText);
         }
