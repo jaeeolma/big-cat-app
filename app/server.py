@@ -1,5 +1,6 @@
 from starlette.applications import Starlette
 from starlette.responses import HTMLResponse, JSONResponse
+from starlette.exceptions import HTTPException
 from starlette.staticfiles import StaticFiles
 from starlette.middleware.cors import CORSMiddleware
 import uvicorn, aiohttp, asyncio
@@ -70,6 +71,28 @@ async def analyze(request):
                 'third_result': classes[top_3[2]],
                 'third_confidence': round(float(res[2][top_3[2]]), 3)}
     return JSONResponse(resp_dict)
+
+@app.route('/analyze_url', methods=['GET'])
+async def analyze_url(request):
+    try:
+        img_bytes = await get_bytes(request.query_params["url"])
+        img = open_image(BytesIO(img_bytes))
+        res = learn.predict(img)
+        top_3 = (res[2].numpy()).argsort()[-3:][::-1]
+        resp_dict = {'best_result': str(res[0]),
+                    'best_confidence': round(float(res[2][top_3[0]]), 3),
+                    'second_result': classes[top_3[1]],
+                    'second_confidence': round(float(res[2][top_3[1]]), 3),
+                    'third_result': classes[top_3[2]],
+                    'third_confidence': round(float(res[2][top_3[2]]), 3)}
+    except:
+        raise HTTPException(500, detail='Invalid image URL')
+    return JSONResponse(resp_dict)
+
+async def get_bytes(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            return await response.read()
 
 if __name__ == '__main__':
     if 'serve' in sys.argv: uvicorn.run(app, host='0.0.0.0', port=8080)
