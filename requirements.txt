@@ -1,4 +1,6 @@
 numpy==1.16.0rc1
+https://download.pytorch.org/whl/cpu/torch-1.0.1-cp36-cp36m-win_amd64.whl
+torchvision
 fastai
 starlette
 uvicorn
