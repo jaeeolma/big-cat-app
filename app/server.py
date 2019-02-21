@@ -94,6 +94,9 @@ async def get_bytes(url):
         async with session.get(url) as response:
             return await response.read()
 
-if __name__ == '__main__':
+def app():
     uvicorn.run(app, host='0.0.0.0', port=8080)
+
+if __name__ == '__main__':
+    if 'serve' in sys.argv: uvicorn.run(app, host='0.0.0.0', port=8080)
 
