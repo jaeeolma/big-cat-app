@@ -1,6 +1,6 @@
 # Which one of the wild cats is in the image
 
-Simple web application for image classification. Running on https://wild-cat-app.herokuapp.com. Input an image, and model tries to predict which of the species of the extended big cat family. Possible labels are
+Simple web application for image classification. Running on https://wild-cat-app.herokuapp.com (and runs out of memory almost all the time). Input an image, and model tries to predict which of the species of the extended big cat family. Possible labels are
 
 - Caracal
 - Cheetah 
